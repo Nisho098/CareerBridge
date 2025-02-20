@@ -1,0 +1,73 @@
+/* General container styling */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Title */
+.title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+}
+
+/* Table Styling */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+thead {
+    background: #007bff;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+tbody tr:hover {
+    background: #f8f9fa;
+}
+
+/* Role Styling */
+.role {
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+/* Actions */
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.delete-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background 0.3s ease-in-out;
+}
+
+.delete-btn:hover {
+    background: #c82333;
+}

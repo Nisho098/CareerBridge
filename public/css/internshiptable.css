@@ -1,0 +1,100 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Table Styles */
+.job-listing-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed;
+}
+
+.job-listing-table th,
+.job-listing-table td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.job-listing-table th {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.job-listing-table td {
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 1rem;
+}
+
+/* Zebra-striping for table rows */
+.job-listing-table tr:nth-child(even) td {
+    background-color: #f2f2f2;
+}
+
+.job-listing-table tr:hover td {
+    background-color: #f1f1f1;
+}
+
+/* Styling for the "Job Details" column links */
+.job-listing-table .btn {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.job-listing-table .btn:hover {
+    background-color: #0056b3;
+    text-decoration: none;
+}
+/* Back Button styling */
+.back-btn {
+    position: absolute;   
+    top: 10px;           
+    left: 10px;           
+    padding: 10px 20px;
+    background-color: #4b6c3d;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    z-index: 10;         
+}
+
+.back-btn:hover {
+    background-color: #0c1d05;
+}
+
+.alert-success {
+    padding: 10px;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }

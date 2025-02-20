@@ -1,0 +1,145 @@
+/* General Body and Layout */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 20;
+    padding: 0;
+}
+
+/* Main Container that wraps the profile and job listing sections */
+.main-content {
+    padding: 20px;
+    margin-left: 250px; /* Account for the sidebar */
+    flex-grow: 1;
+}
+
+/* Profile Section Styling */
+.profile-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 30px auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 180%;
+    max-width: 1000px;
+}
+
+/* Profile Picture Styling */
+.profile-picture img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #4caf50;
+}
+
+/* Profile Details Styling */
+.profile-details {
+    flex-grow: 1;
+}
+
+.profile-details h2 {
+    margin: 0 0 10px;
+    font-size: 24px;
+    color: #333;
+}
+
+.profile-details p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Job Listing Table Section Styling */
+.job-listing-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 50px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.job-listing-table th, .job-listing-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.job-listing-table th {
+    background-color: #4b6c3d;
+    color: white;
+}
+
+.job-listing-table td {
+    background-color: #fff;
+}
+
+/* Action Button Styling */
+.action-container {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-btn {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 100;
+}
+
+.dropdown-menu a {
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.dropdown-menu a:hover {
+    background-color: #206a05;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    /* Make sure the profile section and job listing table are centered */
+    .profile-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .profile-picture img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .job-listing-table {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .job-listing-table th, .job-listing-table td {
+        padding: 10px;
+    }
+
+    /* Adjust the main content layout */
+    .main-content {
+        margin-left: 0;
+        padding: 15px;
+    }
+}

@@ -1,0 +1,67 @@
+/* General Container Styling */
+.container {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+h2 {
+    color: #333;
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+thead {
+    background: #007bff;
+    color: white;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+    background: #f1f1f1;
+}
+
+/* Action Buttons */
+button {
+    border: none;
+    padding: 8px 14px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+button.bg-green-500 {
+    background: #28a745;
+    color: white;
+}
+
+button.bg-green-500:hover {
+    background: #218838;
+}
+
+button.bg-red-500 {
+    background: #dc3545;
+    color: white;
+}
+
+button.bg-red-500:hover {
+    background: #c82333;
+}

@@ -1,0 +1,476 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f7fc;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #2d7743;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.sidebar .logo-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ecf0f1;
+    margin-bottom: 20px;
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 3px;
+    margin: 10px 0;
+    text-decoration: none;
+    color: #ecf0f1;
+    font-size: 1.1em;
+}
+
+.nav-item:hover {
+    background-color: #34495e;
+    border-radius: 5px;
+}
+
+.nav-item i {
+    margin-right: 15px;
+}
+
+/* Main Content Styles */
+.main-content {
+    margin-left: 260px;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    color: #2c3e50;
+    font-size: 2em;
+}
+
+.top-actions {
+    display: flex;
+    align-items: center;
+}
+
+.top-actions .search-box {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-left: 10px;
+}
+
+/* Card Overview */
+.content-overview {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 30%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-icon {
+    font-size: 3em;
+    color: #2ecc71;
+}
+
+.card-details h3 {
+    font-size: 1.2em;
+    color: #34495e;
+}
+
+.card-details p {
+    font-size: 1em;
+    color: #7f8c8d;
+}
+
+/* Activities Section */
+.activities {
+    margin-top: 20px;
+}
+
+/* Logout Button Container */
+.sidebar.logout-mode {
+    margin-top: auto; /* Push to the bottom of the sidebar */
+    list-style-type: none;
+    padding: 0;
+}
+
+
+
+/* Main */
+
+/* Profile Section */
+
+.profile-section {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;  /* Align items to the top */
+    padding: 20px;
+    margin-top: 20px;
+}
+
+
+
+
+.profile-details {
+    margin-bottom: 20px; /* Increased space between elements */
+}
+
+.profile-details h2 {
+    font-size: 28px;  /* Slightly larger font size for the name */
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.profile-details p {
+    font-size: 18px;  /* Increased font size for better readability */
+    margin: 12px 0;
+}
+
+.profile-details p strong {
+    font-weight: 600;
+}
+
+.profile-details p span {
+    color: #777;
+}
+
+/* table */
+box-container {
+    width: 120%;
+    height: 100%;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.job-listing-table {
+    width: 180%;
+    border-collapse: collapse;
+    background-color: #fafafa;
+}
+
+.job-listing-table th,
+.job-listing-table td {
+    padding: 12px 20px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.job-listing-table th {
+    background-color: #3b9c58;
+    color: #fff;
+    font-weight: bold;
+}
+
+.job-listing-table td {
+    color: #333;
+}
+
+.job-listing-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.job-listing-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.job-listing-table td a {
+    padding: 8px 16px;
+    color: #fff;
+    background-color: #28a745;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.job-listing-table td a.btn-apply {
+    background-color: #007bff;
+}
+
+.job-listing-table td a:hover {
+    opacity: 0.8;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    .profile-container,
+    .box-container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .job-listing-table th, .job-listing-table td {
+        padding: 8px 12px;
+    }
+}
+
+/* Sidebar Styling */
+.sidebar {
+    position: fixed;
+    width: 200px; /* Adjust according to your sidebar's width */
+    height: 100vh;
+    background-color: #2d7743;
+    padding-top: 20px;
+    top: 0;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.sidebar ul li a:hover {
+    background-color: #3e9e5f;
+}
+
+/* Header Section */
+.header {
+    position: fixed;
+    top: 0;
+    left: 200px; /* Makes room for the sidebar */
+    right: 0; /* Expands the header to the right side */
+    background-color: #fff; /* Background for the header */
+    padding: 10px 20px;
+    z-index: 1000; /* Ensures it stays on top */
+    display: flex;
+    justify-content: flex-end; /* Aligns the button to the right */
+    align-items: center;
+}
+
+/* Main Content Section */
+/* Ensure the main content adjusts for the sidebar */
+.main-content {
+    margin-left: 200px; /* Space for sidebar */
+    padding: 20px;
+    padding-top: 60px; /* Space for header */
+    box-sizing: border-box; /* Prevents unexpected spacing issues */
+}
+
+/* Dropdown Button and Menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-btn {
+    background-color: #2d7743;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Dropdown Menu Styling */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; /* Position the menu below the button */
+    right: 0; /* Align the dropdown to the right of the button */
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    z-index: 1000;
+    min-width: 50px;
+    overflow: hidden;
+}
+
+.dropdown-menu a {
+    color: #333;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    font-size: 14px;
+}
+
+
+
+
+
+
+
+
+
+
+/* Sidebar Logout Button */
+.sidebar .logout {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.sidebar .logout a {
+    text-decoration: none;
+    color: #ff4d4d;
+    font-weight: bold;
+}
+
+.sidebar .logout a:hover {
+    color: #ff1a1a;
+}
+
+
+.alert {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+
+
+
+    .action-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dots {
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-size: 20px;
+        line-height: 1;
+        padding: 0;
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 5px 0;
+        z-index: 10;
+        width: 150px;
+    }
+
+    .dropdown-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .dropdown-item:hover {
+        background-color: #f0f0f0;
+    }
+
+    .icon {
+        margin-right: 10px;
+    }
+    .profile-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    
+    .profile-info {
+        text-align: center;
+        padding: 20px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .profile-picture {
+        position: relative;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    
+    .profile-picture img {
+        width: 120px;
+        height: 120px;
+        border-radius: 10px;
+        object-fit: cover;
+        border: 2px solid #ccc;
+    }
+    
+    .profile-picture input {
+        display: block;
+        margin-top: 10px;
+    }
+    
+    .job-listing-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .job-listing-table th, .job-listing-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    
+    .job-listing-table th {
+        background-color: #f2f2f2;
+    }
+    
+

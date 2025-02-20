@@ -1,0 +1,113 @@
+/* Container for the recruiter dashboard */
+.container {
+    width: 90%;
+   
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header styling */
+h1 {
+    text-align: left;
+    font-size: 2rem;
+    color: #155724;
+    margin-bottom: 15px;
+}
+
+/* Success message box */
+.alert {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+/* Application card container */
+.application-card {
+    background-color: #e5e4e4;
+    padding: 15px; /* Reduced padding */
+    border: 1px solid #ddd;
+    border-radius: 8px; /* Slightly smaller */
+    margin-bottom: 8px; /* Reduced margin between cards */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    width: 100%;
+    max-width: 750px; /* Slightly reduced width */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Headings & Paragraphs */
+.application-card h2 {
+    font-size: 1.3rem; /* Smaller heading */
+    margin-bottom: 5px; /* Less space below */
+}
+
+.application-card p {
+    font-size: 0.95rem; /* Slightly smaller text */
+    margin-bottom: 5px; /* Less space between lines */
+}
+
+/* Footer section for Job & Resume */
+.application-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 10px; /* Reduced space */
+    font-size: 0.95rem; /* Smaller text */
+}
+
+/* Resume link */
+.resume-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.resume-link:hover {
+    text-decoration: underline;
+}
+
+/* Action Buttons (Reduced Space) */
+.application-actions {
+    display: flex;
+    gap: 5px; /* Less gap between buttons */
+    justify-content: center;
+    margin-top: 10px; /* Pushed closer to job details */
+}
+
+/* Buttons */
+.application-actions button {
+    padding: 8px 16px; /* Smaller buttons */
+    font-size: 0.9rem; /* Smaller text */
+    border-radius: 5px;
+}
+
+/* Reject button */
+.application-actions .btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.application-actions .btn-danger:hover {
+    background-color: #c82333;
+    transform: scale(1.03);
+}
+
+/* Schedule Interview button */
+.application-actions .btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.application-actions .btn-primary:hover {
+    background-color: #0056b3;
+    transform: scale(1.03);
+}
+
