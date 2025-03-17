@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,67 +11,61 @@
 <header>
     <nav>
         <a href="#" class="career-bridge">Career Bridge</a>
-        <!-- <ul>
-            <li><a href="#">Internships</a></li>
-            <li><a href="#">Jobs</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul> -->
         <div class="auth-buttons">
-        <a href="{{ route('Account.signin') }}">
-            <button class="login-btn">Login</button>
-        </a>
+            <a href="{{ route('Account.signin') }}">
+                <button class="login-btn">Login</button>
+            </a>
 
-     
-    <div class="signup-dropdown">
-        <button class="signup-btn">Sign Up</button>
-        <div class="dropdown-menu">
-            <a href="{{ route('Account.studentsignup') }}">Student</a>
-            <a href="{{ route('Account.recuitersignup') }}">Recruiter</a>
-        </div>
-    </div>
-</div>
-    </div>
-</div>
-        </div>
+            <div class="signup-dropdown">
+                <button class="signup-btn">Sign Up</button>
+                <div class="dropdown-menu">
+                    <a href="{{ route('Account.studentsignup') }}">Student</a>
+                    <a href="{{ route('Account.recuitersignup') }}">Recruiter</a>
+                </div>
+            </div>
         </div>
     </nav>
 </header>
 
 <main>
+    <!-- Job Search Section - Added the search form here -->
     <section id="internship-search">
         <h1>Find Your Perfect Student Job</h1>
         <p>Discover internships, part-time roles, and entry-level opportunities tailored for students</p>
-        <form>
-            <input type="text" placeholder="Search jobs, companies, skills...">
-            <button type="submit">Search</button>
+        
+        <!-- Here is the search form that you wanted to add -->
+        <form action="{{ route('jobs.search') }}" method="GET">
+            <input type="text" name="query" placeholder="Search jobs, companies, skills..." required class="form-control">
+            <button type="submit" class="search-btn">Search</button>
         </form>
     </section>
 
+    <!-- Latest Internships -->
     <section id="latest-internships">
         <h2>Browse Job Categories</h2>
         <section class="job-categories">
             <a href="#" class="category-icon">
-            <div class="image-container">
-            <img src="{{ asset('images/suitcase.png') }}" alt="Illustration">
-        </div>
+                <div class="image-container">
+                    <img src="{{ asset('images/suitcase.png') }}" alt="Internships">
+                </div>
                 <span>Internships</span>
             </a>
             <a href="#" class="category-icon">
-            <div class="image-container">
-            <img src="{{ asset('images/freelancer.png') }}" alt="Illustration">
-        </div>
+                <div class="image-container">
+                    <img src="{{ asset('images/freelancer.png') }}" alt="Part-time">
+                </div>
                 <span>Part-time</span>
             </a>
             <a href="#" class="category-icon">
-            <div class="image-container">
-            <img src="{{ asset('images/location.png') }}" alt="Illustration">
-        </div>
+                <div class="image-container">
+                    <img src="{{ asset('images/location.png') }}" alt="Remote">
+                </div>
                 <span>Remote</span>
             </a>
             <a href="#" class="category-icon">
-            <div class="image-container">
-            <img src="{{ asset('images/suitcase.png') }}" alt="Illustration">
-        </div>
+                <div class="image-container">
+                    <img src="{{ asset('images/suitcase.png') }}" alt="Entry Level">
+                </div>
                 <span>Entry Level</span>
             </a>
         </section>
@@ -100,8 +93,8 @@
         <a href="#">FAQs</a>
     </div>
 </footer>
+
 <script src="{{ asset('js/app.js') }}"></script>
 
 </body>
 </html>
-

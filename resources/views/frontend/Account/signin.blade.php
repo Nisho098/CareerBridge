@@ -12,11 +12,12 @@
         <p>{{ session('success') }}</p>
     </div>
 @endif
-@if (session('error'))
+@if(session('error'))
     <div class="alert alert-danger">
-        <p>{{ session('error') }}</p>
+        {{ session('error') }}
     </div>
 @endif
+
 
 <!-- The rest of your login form goes here -->
 

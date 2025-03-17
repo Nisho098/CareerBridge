@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="card">
-        <h2>Manage Users</h2>
+        <h2>Manage User</h2>
         <p>View, edit, or remove users.</p>
         <a href="{{ route('admin.users') }}" class="btn">View Users</a>
     </div>

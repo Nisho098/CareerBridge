@@ -22,6 +22,9 @@ return new class extends Migration
             $table->text('details', 255)->nullable();
             $table->text('personaldetails', 255)->nullable();
             $table->string('address')->nullable(); 
+            $table->string('street')->nullable();
+            $table->decimal('latitude', 10, 7)->nullable(); // Latitude for location
+            $table->decimal('longitude', 10, 7)->nullable();
             $table->text('aboutcompany', 255)->nullable();
             $table->timestamps(); 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Job;
 use App\Models\Application;
+use App\Models\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -46,7 +47,25 @@ class ApplicationController extends Controller
         return view('frontend.RecruiterProfiles.jobApplication', compact('applications'));
     }
     
-
+    public function apply($id)
+    {
+        if (!auth()->check()) {
+            return redirect()->route('login')->with('error', 'You must be logged in to apply for a job.');
+        }
+    
+        // Ensure the job exists and is approved (if applicable)
+        $job = Job::where('id', $id)->where('status', 'approved')->first();
+    
+        if (!$job) {
+            return redirect()->back()->with('error', 'The job is not available or has not been approved.');
+        }
+    
+        return view('apply.create', compact('job'));
+    }
+    
+    
+    
+    
 
     
     
@@ -124,10 +143,37 @@ class ApplicationController extends Controller
 
             Log::info('Application stored in database', ['application_id' => $application->id]);
 
-            return redirect()->route('StudentProfile.showStudentApplications', $job_id)->with('success', 'Application submitted successfully.');
+            return redirect()->route('StudentProfile.showStudentApplications')
+            ->with('success', 'Application submitted successfully.');
+        
         } catch (\Exception $e) {
             Log::error('Error saving application: ' . $e->getMessage());
             return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
         }
     }
+
+
+   // Add this at the top
+public function updateStatus(Request $request, $id)
+{
+    $application = Application::find($id);
+    
+    if (!$application) {
+        return redirect()->back()->with('error', 'Application not found.');
+    }
+
+    // Ensure status is valid
+    $validStatuses = ['submitted', 'in_review', 'rejected', 'accepted'];
+    if (!in_array($request->status, $validStatuses)) {
+        return redirect()->back()->with('error', 'Invalid status.');
+    }
+
+    $application->application_status = $request->status;
+    $application->save();
+
+    return redirect()->back()->with('success', 'Application status updated.');
+}
+
+
+    
 }

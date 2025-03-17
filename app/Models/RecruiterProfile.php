@@ -16,6 +16,8 @@ class RecruiterProfile extends Model
         'company_website',
         'contact_number',
         'address',
+        'latitude',
+        'longitude',
         'details',
         'personaldetails',
         'aboutcompany',

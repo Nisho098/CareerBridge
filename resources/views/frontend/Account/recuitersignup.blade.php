@@ -62,7 +62,7 @@
         <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm your password" >
       </div>
 
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="city">City</label>
         <input type="text" id="city" name="city" placeholder="Enter Company city" >
       </div>
@@ -70,7 +70,7 @@
       <div class="form-group">
         <label for="location">Location</label>
         <input type="text" id="location" name="location" placeholder="Enter company street Address" >
-      </div>
+      </div> -->
 
       <button type="submit" class="btn">Signup</button>
     </form>

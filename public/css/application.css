@@ -14,12 +14,7 @@ h1 {
     margin-bottom: 15px;
 }
 
-/* Success message box */
-.alert {
-    margin-bottom: 20px;
-    padding: 15px;
-    border-radius: 5px;
-}
+
 
 .alert-success {
     background-color: #d4edda;
@@ -111,3 +106,27 @@ h1 {
     transform: scale(1.03);
 }
 
+.application-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.application-status {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-left: auto;
+}
+
+.status.approved {
+    color: green;
+}
+
+.status.rejected {
+    color: red;
+}
+
+.status.pending {
+    color: gray;
+}

@@ -24,8 +24,8 @@
             <tr>
                 <th>Job Title</th>
                 <th>Job Type</th>
-                <th>Location</th>
-                <th>Company</th> <!-- Added Company Column -->
+                
+                <th>Company</th> 
                 <th>Deadline</th>
                 <th>Action</th>
             </tr>
@@ -36,17 +36,22 @@
             <tr>
                 <td>{{ $job->title ?? 'N/A' }}</td>
                 <td>{{ ucfirst($job->job_type ?? 'N/A') }}</td>
-                <td>{{ $job->location ?? 'N/A' }}</td>
+                <!-- <td>{{ $recruiterProfile->address ?? 'N/A' }}</td> -->
 
                 <td>
-                    @if ($job->recruiterProfile && isset($job->recruiterProfile->user_id))
-                        <a href="{{ route('recruiterProfile.show', $job->recruiterProfile->user_id) }}" class="company-link">
-                            {{ $job->recruiterProfile->name ?? 'Company' }}
-                        </a>
-                    @else
-                        N/A
-                    @endif
-                </td>
+    @if ($job->recruiter)
+        <a href="{{ route('recruiterProfile.show', ['id' => $job->recruiter->user_id]) }}" class="company-link">
+            {{ $job->recruiter->name ?? 'No Name' }}
+        </a>
+    @else
+        <span>No Recruiter</span>
+    @endif
+</td>
+
+
+
+
+
 
                 <td>{{ $job->application_deadline ? \Carbon\Carbon::parse($job->application_deadline)->format('F j, Y') : 'No Deadline' }}</td>
                 <td>

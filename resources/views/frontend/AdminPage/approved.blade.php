@@ -32,8 +32,9 @@
                 @foreach($jobs as $job)
                 <tr class="border">
                     <td class="px-4 py-2">{{ $job->title }}</td>
-                    <td class="px-4 py-2">{{ $job->recruiterProfile->company_name ?? 'N/A' }}</td>
-                    <td class="px-4 py-2">{{ $job->location }}</td>
+                    <td class="px-4 py-2">{{ $job->recruiterProfile->name ?? 'N/A' }}</td>
+                    <td class="px-4 py-2">{{ $job->recruiterProfile->address ?? 'N/A' }}</td>
+
                     <td class="px-4 py-2">{{ $job->recruiterProfile->user->name ?? 'Unknown' }}</td>
                     <td class="px-4 py-2 flex space-x-2">
                         <!-- Approve Job -->

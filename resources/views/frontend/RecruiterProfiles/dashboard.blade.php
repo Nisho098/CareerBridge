@@ -30,16 +30,19 @@
     <span>Candidates</span>
 </a>
 
+<a href="{{ url('/chatify') }}" class="nav-item">
+    <span>Chats</span>
+</a>
 
 
 
-
-
-
-<a href="#" class="nav-item"class="nav-item"><span>Chats</span></a></li>
                 <li><a href="{{ route('postinternships.tablecreate') }}" class="nav-item"><span>All Internships</span></a></li>
                 <li><a href="{{ route('postinternships.create') }}" class="nav-item"><span>Post Internships</span></a></li>
-            </ul>
+            
+            
+               
+               </ul>
+           
 
             <!-- Logout Button -->
             <div class="logout">
@@ -70,12 +73,7 @@
      <div class="content">
         @yield('content') <!-- This ensures content from profile page appears here -->
     </div>
-@if (session('success'))
-    <div class="alert alert-success">
-        <p>{{ session('success') }}</p>
-    </div>
-@endif
-    </div>
+
 
     
    

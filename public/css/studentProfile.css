@@ -1,0 +1,56 @@
+/* Repositories Section */
+.section h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.repo-item {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.repo-item h4 {
+    font-size: 20px;
+    margin: 0;
+    color: #007bff;
+}
+
+.repo-item h4 a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.repo-item h4 a:hover {
+    text-decoration: underline;
+}
+
+.repo-item p {
+    font-size: 16px;
+    color: #555;
+}
+
+.repo-item p strong {
+    font-weight: bold;
+}
+
+.repo-item p:last-child {
+    margin-top: 10px;
+}
+
+.repo-item p span {
+    margin-right: 10px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.repo-item p span:first-child {
+    color: #28a745;
+}
+
+.repo-item p span:last-child {
+    color: #f39c12;
+}

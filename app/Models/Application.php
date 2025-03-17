@@ -28,4 +28,5 @@ class Application extends Model
         return $this->belongsTo(Job::class, 'job_id');
     }
     
+
 }

@@ -24,7 +24,11 @@ return new class extends Migration
             $table->text('requirements')->nullable();
             $table->timestamp('posted_at')->useCurrent();
             $table->timestamp('application_deadline')->nullable();
-            $table->string('salary_range', 50)->nullable();
+            $table->decimal('salary', 10, 2)->nullable(); // Salary amount
+            $table->enum('salary_type', ['hourly', 'monthly', 'project-based'])->default('monthly'); 
+            $table->json('benefits')->nullable(); 
+            $table->string('project_duration')->nullable(); 
+            $table->string('payment_terms')->nullable(); 
             $table->enum('status', ['pending', 'approved'])->default('pending');
             $table->timestamps(); 
 

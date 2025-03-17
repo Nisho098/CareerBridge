@@ -32,6 +32,10 @@ class User extends Authenticatable
         'contact',
         'location',
         'cv_url',
+        'github_id',
+        'github_username',
+        'github_token',
+        'github_avatar',
         // Add other fields if necessary
     ];
 
@@ -59,14 +63,24 @@ class User extends Authenticatable
     }
     public function recruiterProfile()
     {
-        return $this->hasOne(Recruiterprofile::class, 'user_id', 'id');
+        return $this->hasOne(Recruiterprofile::class, 'user_id');
     }
 
     public function isAdmin() {
         return $this->role === 'admin';
     }
     
-    
+    public function repositories()
+    {
+        return $this->hasMany(Repository::class);
+    }
+
+    public function applications()
+{
+    return $this->hasMany(Application::class, 'student_id');
+}
+
+
     
     
  

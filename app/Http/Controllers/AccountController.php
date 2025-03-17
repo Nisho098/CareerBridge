@@ -35,98 +35,114 @@ class AccountController extends Controller
     }
            //this method will save user registration
            public function processStudentRegistration(Request $request)
-    {
-        // Validate the student registration data
-     
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:50',
-            'email' => [
-            'required',
-            'email',
-            'unique:users,email',
-            'max:100',
-            function ($attribute, $value, $fail) {
-                if (!str_ends_with($value, '@edu.np')) {
-                    $fail('The email must end with @edu.np.');
-                }
-            },
-        ],
-        'password' => 'required|min:8|same:confirm_password',
-        'confirm_password' => 'required',
-        'role' => 'required|string|in:student',
-    ]);
+           {
+               // Validate the student registration data
+               $validator = Validator::make($request->all(), [
+                   'name' => 'required|string|max:50',
+                   'email' => [
+                       'required',
+                       'email',
+                       'unique:users,email',
+                       'max:100',
+                       function ($attribute, $value, $fail) {
+                           if (!str_ends_with($value, '@edu.np')) {
+                               $fail('The email must end with @edu.np.');
+                           }
+                       },
+                   ],
+                   'password' => 'required|min:5|same:confirm_password',
+                   'confirm_password' => 'required',
+                   'role' => 'required|string|in:student',
+               ], [
+                   // Custom error messages
+                   'name.required' => 'The name field is required.',
+                   'email.required' => 'Please enter your email address.',
+                   'email.email' => 'Please enter a valid email address.',
+                   'email.unique' => 'This email is already registered.',
+                   'email.max' => 'The email address must not exceed 100 characters.',
+                   'password.required' => 'The password field is required.',
+                   'password.min' => 'The password must be at least 5 characters long.',
+                   'password.same' => 'The password and confirm password must match.',
+                   'confirm_password.required' => 'The confirm password field is required.',
+                   'role.required' => 'The role field is required.',
+                   'role.in' => 'Invalid role selected. Please select a valid role.',
+               ]);
+           
+               if ($validator->fails()) {
+                   return redirect()->back()
+                       ->withErrors($validator)
+                       ->withInput();
+               }
+           
+               // Save the student to the database
+               $user = User::create([
+                   'name' => $request->name,
+                   'email' => $request->email,
+                   'password' => Hash::make($request->password),
+                   'role' => 'student',
+               ]);
+           
+               // Create student profile
+               Studentprofile::create([
+                   'user_id' => $user->id,
+                   'name' => $user->name,
+               ]);
+           
+               // Log in the user
+               Auth::login($user);
+           
+               return redirect()->route('Account.signin')->with('success', 'Registration successful! You can now log in.');
+           }
            
 
+
+
+    public function processRecruiterRegistration(Request $request)
+    {
+        // Validate the input data
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:50',
+            'email' => 'required|email|unique:users,email|max:100',
+            'password' => 'required|min:8|same:confirm_password',
+            'confirm_password' => 'required',
+            'role' => 'required|string|in:recruiter',
+        ], [
+            'name.required' => 'The name field is required.',
+            'email.required' => 'Please enter your email.',
+            'email.email' => 'Please enter a valid email address.',
+            'email.unique' => 'This email is already taken.',
+            'password.required' => 'The password field is required.',
+            'password.min' => 'The password must be at least 8 characters long.',
+            'password.same' => 'The password and confirm password must match.',
+            'confirm_password.required' => 'The confirm password field is required.',
+            'role.required' => 'The role field is required.',
+        ]);
+        
+    
         if ($validator->fails()) {
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
         }
-
-        // Save the student to the database
+    
+        // Create a new recruiter user in the `users` table
         $user = User::create([
             'name' => $request->name,
-            'email' => $request->email,  // Ensure email is passed correctly
+            'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'student',
-
-
+            'role' => $request->role, // Assign role from validated input
         ]);
-
-        // Set the role as 'student'
     
-        Studentprofile::create([
+        // Create a corresponding profile in the `recruiter_profiles` table
+        Recruiterprofile::create([
             'user_id' => $user->id,
             'name' => $user->name,
         ]);
-          // Send the email verification notification
-   
-
-    // You can log in the user or redirect them
-    Auth::login($user);
-
-        return redirect()->route('Account.signin')->with('success', 'Registration successful! You can now log in.');
-
-
-    }
-
-
-    // * Process recruiter registration.
     
-    public function processRecruiterRegistration(Request $request)
-{
-    // Validate the input data
-    $validator = Validator::make($request->all(), [
-        'name' => 'required|string|max:50',
-        'email' => 'required|email|unique:users,email|max:100',
-        'password' => 'required|min:8|same:confirm_password',
-        'confirm_password' => 'required',
-        'role' => 'required|string|in:recruiter', // Validate role as 'recruiter'
-    ]);
-
-    if ($validator->fails()) {
-        return redirect()->back()
-            ->withErrors($validator)
-            ->withInput();
+        // Redirect to the recruiter's dashboard or a success page
+        return redirect()->route('Account.signin')->with('success', 'Recruiter registration successful!');
     }
-
-    // Create a new recruiter user in the `users` table
-    $user = User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-        'role' => $request->role, // Assign role from validated input
-    ]);
-
-    // Create a corresponding profile in the `recruiter_profiles` table
-    Recruiterprofile::create([
-        'user_id' => $user->id,
-        'name' => $user->name,
-    ]);
-
-    // Redirect to the recruiter's dashboard or a success page
-    return redirect()->route('Account.signin')->with('success', 'Recruiter registration successful!');
-}
+    
 
 
 public function forgetPassword()

@@ -28,20 +28,24 @@
                         <tr>
                             <td>{{ $application->job->title }}</td>
                             <td>{{ $application->job->job_type }}</td>
-                            <td>{{ $application->job->location }}</td>
+                            <td>{{ $application->job->recruiterProfile->address ?? 'Not Provided' }}</td>
+
                             <td>
-                                @if($application->application_status == 'submitted')
-                                    <span class="badge badge-warning">Submitted</span>
-                                @elseif($application->application_status == 'interview')
-                                    <span class="badge badge-info">Interview Scheduled</span>
-                                @elseif($application->application_status == 'rejected')
-                                    <span class="badge badge-danger">Rejected</span>
-                                @elseif($application->application_status == 'in_review')
-                                    <span class="badge badge-primary">In Review</span>
-                                @else
-                                    <span class="badge badge-secondary">Unknown</span>
-                                @endif
-                            </td>
+    @if($application->application_status == 'submitted')
+        <span class="badge badge-warning">Submitted</span>
+    @elseif($application->application_status == 'interview')
+        <span class="badge badge-info">Interview Scheduled</span>
+    @elseif($application->application_status == 'rejected')
+        <span class="badge badge-danger">Rejected</span>
+    @elseif($application->application_status == 'in_review')
+        <span class="badge badge-primary">In Review</span>
+    @elseif($application->application_status == 'accepted')  
+        <span class="badge badge-success">Accepted</span>
+    @else
+        <span class="badge badge-secondary">Unknown</span>
+    @endif
+</td>
+
                         </tr>
                     @endforeach
                 </tbody>

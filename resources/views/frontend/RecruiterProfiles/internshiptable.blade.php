@@ -12,12 +12,13 @@
 <body>
 
 <div class="container">
-     <!-- Success Message -->
-  @if (session('success'))
+@if (session()->has('success'))
     <div class="alert alert-success">
-      <p>{{ session('success') }}</p>
+        <p>{{ session('success') }}</p>
+        @php session()->forget('success'); @endphp
     </div>
-  @endif
+@endif
+
     <h1>Posted Internships</h1>
 
     <div class="box-container">

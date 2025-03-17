@@ -15,22 +15,40 @@ class Job extends Model
         'job_type',
         'industry',
         'requirements',
+        'salary',
+        'benefits',
+       'salary_type',
+       'project_duration',
+       'payment_terms',
         'application_deadline',
         'recruiter_id',
         'status'
     ];
 
-    
-    public function jobs()
-    {
-        return $this->hasMany(Job::class, 'recruiter_id');
-    }
-   
-    
+    protected $casts = [
+        'benefits' => 'array', 
+    ];
+
     public function recruiterProfile()
     {
-        return $this->belongsTo(RecruiterProfile::class, 'recruiter_id', 'user_id');
+        return $this->belongsTo(RecruiterProfile::class, 'recruiter_id', 'id');
     }
+    
+   
+    public function user()
+{
+    return $this->belongsTo(User::class);
+}
+public function recruiter()
+{
+    return $this->belongsTo(RecruiterProfile::class, 'recruiter_id');
+}
+
+
+
+
+    
+    
     
     
     

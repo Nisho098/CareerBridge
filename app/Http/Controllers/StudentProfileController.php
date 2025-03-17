@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Job;
 use App\Models\User;
+use Illuminate\Support\Facades\Redirect;
+
 use App\Models\StudentProfile;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Application;
@@ -97,11 +99,15 @@ class StudentProfileController extends Controller
         $profile->contact = $validated['contact'] ?? '';
         $profile->location = $validated['location'] ?? '';
 
-        // Handle file upload for resume
-        if ($request->hasFile('resume_url')) {
-            $resumePath = $request->file('resume_url')->store('resumes', 'public');
-            $profile->resume_url = $resumePath;
-        }
+    // Handle file upload for resume
+if ($request->hasFile('resume_url')) {
+   
+    $customName = 'Resume.pdf';
+
+    $resumePath = $request->file('resume_url')->storeAs('resumes', $customName, 'public');
+
+    $profile->resume_url = $resumePath;
+}
 
         // Save the profile
         $profile->save();

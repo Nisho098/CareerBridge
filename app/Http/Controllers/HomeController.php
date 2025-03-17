@@ -20,6 +20,10 @@ class HomeController extends Controller
     {
        return view('frontend.home');
     }
+    public function logout()
+    {
+       return view('frontend.home');
+    }
   
     
 

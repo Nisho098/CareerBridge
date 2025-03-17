@@ -6,23 +6,24 @@
     <title>Student Profile</title>
     <link rel="stylesheet" href="{{ asset('css/landing.css') }}">
     <link rel="stylesheet" href="{{ asset('css/recruiterProfile.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/studentProfile.css') }}"> <!-- Add a new CSS file for profile -->
 </head>
 <body>
-<form action="{{ route('studentProfile.update') }}" method="POST" enctype="multipart/form-data">
-<div class="profile-container">
-@if ($studentProfile)  {{-- ✅ START of IF condition --}}
-    <div class="profile-picture">
-        <img src="{{ $studentProfile->profile_picture ? asset('storage/profile_pictures/' . $studentProfile->profile_picture) : asset('images/default-profile.jpg') }}" alt="Profile Picture">
-    </div>
 
-    <!-- Profile Details Section -->
-    <div class="profile-details">
-        <h2>{{ $studentProfile->name }}</h2>
-        <p><strong>Address:</strong> {{ $studentProfile->location ?? 'Not Provided' }}</p>
-        <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
-        <p><strong>Contact:</strong> {{ $studentProfile->contact ?? 'Not Provided' }}</p>
+<div class="profile-container">
+    @if ($studentProfile)  {{-- ✅ START of IF condition --}}
+        <div class="profile-picture">
+            <img src="{{ $studentProfile->profile_picture ? asset('storage/profile_pictures/' . $studentProfile->profile_picture) : asset('images/default-profile.jpg') }}" alt="Profile Picture">
+        </div>
+
+        <!-- Profile Details Section -->
+        <div class="profile-details">
+            <h2>{{ $studentProfile->name }}</h2>
+            <p><strong>Address:</strong> {{ $studentProfile->location ?? 'Not Provided' }}</p>
+            <p><strong>Email:</strong> {{ $studentProfile->user->email ?? 'Not Provided' }}</p>
+            <p><strong>Contact:</strong> {{ $studentProfile->contact ?? 'Not Provided' }}</p>
+        </div>
     </div>
-</div>
 
     <!-- Edit Button (Only visible for the owner of the profile) -->
     @if(Auth::user()->id === $studentProfile->user_id)
@@ -54,27 +55,31 @@
         </div>
 
         <div class="section">
-            <h3>File Attachment</h3>
+            <h3>Resume</h3>
 
             @if ($studentProfile->resume_url)
-                <div class="file-attachment">
-                    <div class="file-info">
-                        <p>{{ basename($studentProfile->resume_url) }}</p>
-                    </div>
-                    <a href="{{ asset('storage/' . $studentProfile->resume_url) }}" target="_blank" class="download-btn">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-                        </svg>
-                    </a>
-                </div>
-            @else
-                <p>No resume uploaded.</p>
-            @endif
+    <div class="file-attachment">
+        <div class="file-info">
+            <p>{{ basename($studentProfile->resume_url) }}</p>
         </div>
+        <a href="{{ asset('storage/' . $studentProfile->resume_url) }}" 
+           target="_blank" 
+           class="download-btn" 
+           download="{{ basename($studentProfile->resume_url) }}">
+            <svg viewBox="0 0 24 24">
+                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+            </svg>
+        </a>
     </div>
-  
+@else
+    <p>No resume uploaded.</p>
 @endif
 
+
+
+       
+    </div>
+@endif  
 <script src="{{ asset('js/studentdashboard.js') }}"></script>
 </body>
 </html>

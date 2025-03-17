@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
@@ -28,19 +29,47 @@ class AdminController extends Controller
     
 
     public function showPendingJobs()
-{
-    $jobs = Job::where('status', 'pending')->get(); // Fetch only jobs awaiting approval
+{$jobs = Job::with('recruiter')->where('status', 'pending')->get();
+
+    // Fetch only jobs awaiting approval
     return view('frontend.AdminPage.approved', compact('jobs'));
 }
 
 public function approveJob($id)
 {
     $job = Job::findOrFail($id);
-    $job->status = 'approved'; // Change status
+    $job->status = 'approved';
     $job->save();
 
-    return redirect()->back()->with('success', 'Job approved successfully!');
+    // Convert job title into lowercase words
+    $jobTitleWords = array_map('strtolower', explode(' ', $job->title));
+
+    // Fetch students with skills matching job title words
+    $students = User::where('role', 'student')
+        ->whereHas('studentProfile', function ($query) use ($jobTitleWords) {
+            $query->where(function ($q) use ($jobTitleWords) {
+                foreach ($jobTitleWords as $word) {
+                    $q->orWhereRaw("LOWER(skills) LIKE ?", ["%{$word}%"]);
+                }
+            });
+        })
+        ->get();
+
+    // ✅ Debugging: Log the students who match
+    Log::info("Matching students for Job ID {$job->id}: " . $students->pluck('id')->join(', '));
+
+    // Notify only matching students
+    foreach ($students as $student) {
+        app(JobController::class)->matchJob($student, $job);
+    }
+
+    return redirect()->back()->with('success', 'Job approved and matching students notified!');
 }
+
+
+
+
+
 
 public function deleteJob($id)
 {

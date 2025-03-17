@@ -22,12 +22,18 @@
             </div>
 
             <ul class="nav-links">
-                <li><a href="{{ route('home.dindex') }}" class="nav-item"><i class="uil uil-tachometer-fast-alt"></i><span>Dashboard</span></a></li>
-                <li><a href="{{ route('StudentProfile.showStudentApplications') }}" class="nav-item"><i class="uil uil-briefcase"></i><span>Application</span></a></li>
-                <li><a href="#" class="nav-item"><i class="uil uil-comment-alt-dots"></i><span>Chats</span></a></li>
-                <li><a href="#" class="nav-item"><i class="uil uil-building"></i><span>Companies</span></a></li>
-                <!-- <li><a href="{{ route('studentProfile.create') }}" class="nav-item"><i class="uil uil-user-circle"></i><span>My Profile</span></a></li> -->
+                <li><a href="{{ route('home.dindex') }}" class="nav-item"><span>Dashboard</span></a></li>
+                <li><a href="{{ route('StudentProfile.showStudentApplications') }}" class="nav-item"><span>Application</span></a></li>
+                <li><a href="{{ url('/chatify') }}" class="nav-item">
+    <span>Chats</span>
+</a></li>
+<li><a href="{{ route('freelancing.index') }}" class="nav-item"><span>Freelancing</span></a></li>
+
+
+                <li><a href="{{ route('notifications') }}" class="nav-item"><span>Notifications</span></a></li>
+               
             </ul>
+          
 
             <!-- Logout Button -->
             <div class="logout">
