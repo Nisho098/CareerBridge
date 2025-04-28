@@ -34,22 +34,23 @@
                     <td class="px-4 py-2">{{ $job->title }}</td>
                     <td class="px-4 py-2">{{ $job->recruiterProfile->name ?? 'N/A' }}</td>
                     <td class="px-4 py-2">{{ $job->recruiterProfile->address ?? 'N/A' }}</td>
-
                     <td class="px-4 py-2">{{ $job->recruiterProfile->user->name ?? 'Unknown' }}</td>
-                    <td class="px-4 py-2 flex space-x-2">
-                        <!-- Approve Job -->
-                        <form action="{{ route('admin.approveJob', $job->id) }}" method="POST">
-                            @csrf
-                            @method('PATCH')
-                            <button type="submit" class="bg-green-500 text-white px-3 py-1 rounded">Approve</button>
-                        </form>
+                    <td class="px-4 py-2">
+                        <div class="action-buttons">
+                            <!-- Approve Job -->
+                            <form action="{{ route('admin.approveJob', $job->id) }}" method="POST">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="bg-green-500 text-white px-3 py-1 rounded">Approve</button>
+                            </form>
 
-                        <!-- Delete Job -->
-                        <form action="{{ route('admin.deleteJob', $job->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this job?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded">Delete</button>
-                        </form>
+                            <!-- Delete Job -->
+                            <form action="{{ route('admin.deleteJob', $job->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this job?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded">Delete</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 @endforeach
@@ -58,4 +59,3 @@
     @endif
 </div>
 @endsection
-

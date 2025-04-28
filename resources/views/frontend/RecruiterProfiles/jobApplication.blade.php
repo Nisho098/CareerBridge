@@ -2,24 +2,21 @@
 
 @section('content')
 @csrf
+
 <link rel="stylesheet" href="{{ asset('css/application.css') }}">
 
 <div class="container">
-    <h1>Candidate Applications for: 
-        @if(isset($job))
-            {{ $job->title }}
-        @else
-            All Jobs
-        @endif
+    <h1>Candidate Applications 
     </h1>
 
-    <!-- Check for success message -->
+    <!-- Success Message -->
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
     @endif
 
+    <!-- Empty State -->
     @if($applications->isEmpty())
         <div class="alert alert-warning">
             No applications have been submitted yet.
@@ -48,7 +45,6 @@
                     @endif
                 </p>
 
-                <!-- Job, Job Type & Resume Section -->
                 <div class="application-footer">
                     <div>
                         <strong>Applied for Job:</strong> {{ $application->job->title }}
@@ -56,40 +52,51 @@
                     <div>
                         <strong>Job Type:</strong> {{ ucfirst($application->job->job_type) }}
                     </div>
-                    <a href="{{ asset('storage/resumes/' . $application->resume) }}" 
-   class="resume-link" 
-   download="{{ $application->resume }}" 
-   target="_blank">
-   Download CoverLetter
-</a>
+                    <a href="{{ asset('storage/resumes/' . $application->resume) }}"
+                       class="resume-link"
+                       download="{{ $application->resume }}"
+                       target="_blank">
+                        Download CoverLetter
+                    </a>
+                </div>
 
+                <!-- Action Section -->
+                <div class="application-actions" style="margin-top: 10px;">
+                    @if ($application->application_status === 'submitted')
+                        <form action="{{ route('recruiter.rejectApplication', $application->id) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Reject</button>
+                        </form>
 
-                <!-- Action Buttons & Status -->
-                <div class="application-actions">
-                    <form action="{{ route('recruiter.rejectApplication', $application->id) }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-danger">Reject</button>
-                    </form>
+                        <form action="{{ route('recruiter.scheduleInterview', $application->id) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">Approve</button>
+                        </form>
+                    @endif
 
-                    <form action="{{ route('recruiter.scheduleInterview', $application->id) }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-primary">Approve</button>
-                    </form>
+                    <a href="{{ route('job.showReferPage') }}" class="btn btn-warning" style="margin-left: 10px;">Refer Candidate</a>
 
-                    <!-- Status Display (Right Side) -->
-                    <div class="application-status">
-                        @if ($application->application_status == 'approved')
-                            <span class="status approved">Approved</span>
-                        @elseif ($application->application_status == 'rejected')
-                            <span class="status rejected">Rejected</span>
-                        @else
-                            <span class="status pending">Pending</span>
-                        @endif
-                    </div>
+                    <!-- Status Display -->
+                    @if ($application->application_status === 'accepted')
+                        <div class="application-status approved" style="margin-top: 10px;">
+                            Approved
+                        </div>
+                    @elseif ($application->application_status === 'rejected')
+                        <div class="application-status rejected" style="margin-top: 10px;">
+                            Rejected
+                        </div>
+                    @elseif ($application->application_status === 'under review')
+                        <div class="application-status under-review" style="margin-top: 10px;">
+                            Under Review
+                        </div>
+                    @elseif ($application->application_status === 'pending') <!-- Corrected check for 'pending' status -->
+                        <div class="application-status pending" style="margin-top: 10px;">
+                            Pending
+                        </div>
+                    @endif
                 </div>
             </div>
         @endforeach
     @endif
 </div>
-
 @endsection

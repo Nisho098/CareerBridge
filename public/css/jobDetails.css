@@ -9,7 +9,7 @@ body {
 
 /* Header Styling */
 header {
-    background-color: #76b852;
+    background-color: #155724;
     color: white;
     text-align: center;
     width: 100%;
@@ -36,7 +36,7 @@ header h1 {
 
 /* Job Title */
 .job-details h2 {
-    color: #76b852;
+    color: #155724;
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 1rem;
@@ -53,7 +53,7 @@ header h1 {
 .job-details .btn {
     display: inline-block;
     padding: 12px 24px;
-    background-color: #76b852;
+    background-color: #155724;
     color: white;
     text-decoration: none;
     border-radius: 5px;

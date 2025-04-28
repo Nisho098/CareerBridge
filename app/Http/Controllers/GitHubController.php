@@ -1,73 +1,81 @@
-<!-- ?php
+<?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Laravel\Socialite\Facades\Socialite;
+use Laravel\Socialite\Two\InvalidStateException;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
-
-use App\Models\User;
+use App\Models\GitHubRepository;
+use Github\Client as GitHubClient;
+use Illuminate\Support\Facades\Log;
+use Exception;
 
 class GitHubController extends Controller
 {
+    
     public function redirectToGitHub()
     {
-        $scopes = config('services.github.scopes', []);
-    
-        return Socialite::driver('github')
-            ->scopes($scopes) 
-            ->redirect();
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Please login first.');
+        }
+
+        return Socialite::driver('github')->redirect();
     }
-    
-    
 
-    // Handle GitHub callback and store the authenticated user's data
+  
     public function handleGitHubCallback()
-    {
-        try {
-            // Get the authenticated user's GitHub data
-            $githubUser = Socialite::driver('github')->user();
+{
+    try {
+        $githubUser = Socialite::driver('github')->user();
+        $user = Auth::user();
 
-            // Find or create the user in the database
-            $user = User::updateOrCreate(
-                ['github_id' => $githubUser->id],
-                [
-                    'name' => $githubUser->name,
-                    'email' => $githubUser->email,
-                    'github_username' => $githubUser->nickname,
-                    'github_token' => $githubUser->token,
-                    'github_avatar' => $githubUser->avatar,
-                ]
-            );
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Please login first.');
+        }
 
-            // Log the user into the app
-            Auth::login($user);
+       
+        $user->github_id = $githubUser->getId();
+        $user->github_token = $githubUser->token;
+        $user->avatar = $githubUser->getAvatar();
+        $user->save();  
 
-            // Fetch GitHub repositories using the user's token
-            $repos = Http::withToken($user->github_token)
-                ->get('https://api.github.com/user/repos')
-                ->json();
+        
+        $client = new GitHubClient();
+        $client->authenticate($githubUser->token, null, GitHubClient::AUTH_ACCESS_TOKEN);
 
-            // Optionally, store repositories in the database
-            foreach ($repos as $repo) {
-                $user->repositories()->updateOrCreate(
-                    ['github_id' => $repo['id']],
-                    [
-                        'name' => $repo['name'],
-                        'description' => $repo['description'],
-                        'url' => $repo['html_url'],
-                        'language' => $repo['language'],
-                        'stars' => $repo['stargazers_count'],
-                        'forks' => $repo['forks_count'],
-                    ]
-                );
+        $repositories = $client->api('user')->repositories($githubUser->getNickname());
+
+       
+        foreach ($repositories as $repo) {
+           
+            $readme = null;
+            try {
+                $readme = $client->api('repo')->contents()->readme($githubUser->getNickname(), $repo['name']);
+            } catch (\Exception $e) {
+                
             }
 
-            // Redirect to the dashboard
-            return redirect('/dashboard');
-        } catch (\Exception $e) {
-            return redirect('/login')->with('error', 'GitHub authentication failed! ' . $e->getMessage());
+            GitHubRepository::updateOrCreate(
+                ['github_id' => $repo['id']], 
+                [
+                    'user_id' => $user->id,
+                    'github_name' => $repo['name'],
+                    'description' => $repo['description'] ?? 'No description available',
+                    'url' => $repo['html_url'],
+                    'is_public' => !$repo['private'], 
+                    'readme' => $readme['content'] ?? null, 
+                ]
+            );
         }
+
+        return redirect()->route('studentProfile.create')->with('success', 'GitHub linked and repositories saved!');
+    } catch (InvalidStateException $e) {
+        Log::error('InvalidStateException: ' . $e->getMessage());
+        return redirect()->route('login')->with('error', 'Invalid state, please try again.');
+    } catch (Exception $e) {
+        Log::error('Exception: ' . $e->getMessage());
+        return redirect()->route('studentProfile.create')->with('error', 'An error occurred while processing your request.');
     }
-} -->
+}
+
+}

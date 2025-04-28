@@ -38,7 +38,7 @@ class PostInternshipController extends Controller
 
     public function store(Request $request)
 {
-    // Define validation rules
+   
     $validatedData = $request->validate([
         'title' => 'required|string|max:255',
         'description' => 'required|string',
@@ -48,12 +48,12 @@ class PostInternshipController extends Controller
         
         'job_type' => 'required|string|in:full-time,part-time,internship',
         'industry' => 'nullable|string|max:255', 
-        'requirements' => 'nullable|string', 
+        'requirements' => 'required|nullable|string', 
         'application_deadline' => 'nullable|date|after_or_equal:today', 
-        'project_duration' => 'nullable|string|max:255', // New field
-        'payment_terms' => 'nullable|string|max:255', // New field
+        'project_duration' => 'nullable|string|max:255', 
+        'payment_terms' => 'nullable|string|max:255', 
     ], [
-        // Custom error messages
+       
         'title.required' => 'The job title is required.',
         'description.required' => 'Please enter a job description.',
         'job_type.required' => 'Please select a job type.',
@@ -62,21 +62,21 @@ class PostInternshipController extends Controller
         'application_deadline.after_or_equal' => 'The deadline cannot be in the past.',
     ]);
 
-    // Check if the recruiter profile exists
+    
     $recruiterProfile = Recruiterprofile::where('user_id', auth()->user()->id)->first();
 
     if (!$recruiterProfile) {
         return redirect()->back()->with('error', 'Recruiter profile does not exist. Please complete your profile first.');
     }
 
-    // Convert benefits from comma-separated string to array
+   
     if (!empty($validatedData['benefits'])) {
         $validatedData['benefits'] = explode(',', $validatedData['benefits']);
     } else {
-        $validatedData['benefits'] = []; // Default to an empty array
+        $validatedData['benefits'] = []; 
     }
 
-    // Create a new job instance
+  
     $job = new Job;
     $job->title = $validatedData['title'];
     $job->description = $validatedData['description'];
@@ -91,17 +91,17 @@ class PostInternshipController extends Controller
     $job->status = 'pending'; 
     $job->recruiter_id = $recruiterProfile->id;
 
-    // Add project_duration and payment_terms for part-time jobs
+    
     if ($validatedData['job_type'] === 'part-time') {
         $job->project_duration = $validatedData['project_duration'];
         $job->payment_terms = $validatedData['payment_terms'];
     } else {
-        // Set to null for other job types
+        
         $job->project_duration = null;
         $job->payment_terms = null;
     }
 
-    // Save the job
+    
     $job->save();
 
     return redirect()->route('postinternships.tablecreate')->with('success', 'Internship posted successfully!');
@@ -126,7 +126,7 @@ class PostInternshipController extends Controller
         $request->validate([
             "title" => "required|string|max:255",
             "description" => "required|string",
-            "location" => "required|string|max:255",
+            "requirements"=>"required|string",
             "job_type" => "required|string",
             "industry" => "required|string|max:255",
             "application_deadline" => "required|date",
@@ -135,7 +135,7 @@ class PostInternshipController extends Controller
         $job->update([
             'title' => $request->title,
             'description' => $request->description,
-            'location' => $request->location,
+           'requirements'=>$request->requirements,
             'job_type' => $request->job_type,
             'industry' => $request->industry,
             'application_deadline' => $request->application_deadline,

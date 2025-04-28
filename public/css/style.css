@@ -9,7 +9,7 @@
 /* Header Styles */
 header {
     .career-bridge { color: #3b9c58; }
-    background-color: white; /* Change header background to white */
+    background-color: white; 
     color: #fff;
     padding: 1rem;
 }
@@ -17,7 +17,7 @@ header {
 nav {
     display: flex;
     justify-content: space-between;
-    align-items: center; /* Align items properly in the center */
+    align-items: center; 
 }
 
 nav a {
@@ -37,7 +37,7 @@ nav ul li {
 
 /* Career Bridge color */
 .career-bridge {
-    color: #3b9c58; /* Green color for Career Bridge */
+    color: #3b9c58; 
     font-size: 1.5rem;
     font-weight: bold;
 }
@@ -51,7 +51,7 @@ nav ul li {
 
 /* Login Button */
 .login-btn {
-    background-color: #3b9c58; /* Green color for login button */
+    background-color: #3b9c58; 
     color: white;
     border: none;
     padding: 0.5rem 1rem;
@@ -61,7 +61,7 @@ nav ul li {
 }
 
 .login-btn:hover {
-    background-color: #276d45; /* Darker green on hover */
+    background-color: #276d45; 
 }
 
 /* Sign-Up Dropdown */
@@ -70,7 +70,7 @@ nav ul li {
 }
 
 .signup-btn {
-    background-color: #3b9c58; /* Green color for sign-up button */
+    background-color: #3b9c58; 
     color: white;
     border: none;
     padding: 0.5rem 1rem;
@@ -80,7 +80,7 @@ nav ul li {
 }
 
 .signup-btn:hover {
-    background-color: #276d45; /* Darker green on hover */
+    background-color: #276d45; 
 }
 
 .signup-dropdown .dropdown-menu {
@@ -184,7 +184,7 @@ nav ul li {
 
 /* Footer Styles */
 footer {
-    background-color: #3b9c58; /* Green color for footer */
+    background-color: #3b9c58; 
     color: #fff;
     padding: 2rem;
     display: flex;

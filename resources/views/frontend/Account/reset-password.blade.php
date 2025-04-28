@@ -35,14 +35,14 @@
         .form-container button {
             width: 100%;
             padding: 10px;
-            background: #007bff;
+            background: #28a745;
             color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
         .form-container button:hover {
-            background: #0056b3;
+            background: #28a745;
         }
         .alert {
             padding: 10px;
@@ -66,7 +66,7 @@
     <div class="form-container">
         <h2>Reset Password</h2>
         
-        <!-- Display Success or Error Message -->
+       
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -79,7 +79,7 @@
             </div>
         @endif
 
-        <!-- Display Validation Errors -->
+        
         @if ($errors->any())
             <div class="alert alert-error">
                 <ul style="list-style: none; padding: 0; margin: 0;">
@@ -93,14 +93,13 @@
         <form action="{{ route('Account.processResetPassword', ['token' => $token]) }}" method="POST">
             @csrf
 
-            <!-- New Password Field -->
+          
             <input 
                 type="password" 
                 name="password" 
                 placeholder="Enter your new password" 
                 required>
-            
-            <!-- Confirm Password Field -->
+        
             <input 
                 type="password" 
                 name="password_confirmation" 

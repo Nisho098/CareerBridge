@@ -9,10 +9,10 @@ class Notification extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['student_id', 'message', 'type', 'read_at']; // changed user_id to student_id
+    protected $fillable = ['student_id', 'message', 'type', 'read_at']; 
 
     public function student()
     {
-        return $this->belongsTo(User::class, 'student_id'); // Ensuring relationship with the correct column
+        return $this->belongsTo(User::class, 'student_id'); 
     }
 }

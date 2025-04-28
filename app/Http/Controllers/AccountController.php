@@ -33,10 +33,9 @@ class AccountController extends Controller
     {
         return view('frontend.Account.recuitersignup');
     }
-           //this method will save user registration
+         
            public function processStudentRegistration(Request $request)
            {
-               // Validate the student registration data
                $validator = Validator::make($request->all(), [
                    'name' => 'required|string|max:50',
                    'email' => [
@@ -54,7 +53,7 @@ class AccountController extends Controller
                    'confirm_password' => 'required',
                    'role' => 'required|string|in:student',
                ], [
-                   // Custom error messages
+                  
                    'name.required' => 'The name field is required.',
                    'email.required' => 'Please enter your email address.',
                    'email.email' => 'Please enter a valid email address.',
@@ -74,7 +73,7 @@ class AccountController extends Controller
                        ->withInput();
                }
            
-               // Save the student to the database
+              
                $user = User::create([
                    'name' => $request->name,
                    'email' => $request->email,
@@ -82,13 +81,13 @@ class AccountController extends Controller
                    'role' => 'student',
                ]);
            
-               // Create student profile
+             
                Studentprofile::create([
                    'user_id' => $user->id,
                    'name' => $user->name,
                ]);
            
-               // Log in the user
+              
                Auth::login($user);
            
                return redirect()->route('Account.signin')->with('success', 'Registration successful! You can now log in.');
@@ -99,11 +98,11 @@ class AccountController extends Controller
 
     public function processRecruiterRegistration(Request $request)
     {
-        // Validate the input data
+       
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:50',
             'email' => 'required|email|unique:users,email|max:100',
-            'password' => 'required|min:8|same:confirm_password',
+            'password' => 'required|min:5|same:confirm_password',
             'confirm_password' => 'required',
             'role' => 'required|string|in:recruiter',
         ], [
@@ -112,7 +111,7 @@ class AccountController extends Controller
             'email.email' => 'Please enter a valid email address.',
             'email.unique' => 'This email is already taken.',
             'password.required' => 'The password field is required.',
-            'password.min' => 'The password must be at least 8 characters long.',
+            'password.min' => 'The password must be at least 5 characters long.',
             'password.same' => 'The password and confirm password must match.',
             'confirm_password.required' => 'The confirm password field is required.',
             'role.required' => 'The role field is required.',
@@ -125,21 +124,21 @@ class AccountController extends Controller
                 ->withInput();
         }
     
-        // Create a new recruiter user in the `users` table
+       
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role, // Assign role from validated input
+            'role' => $request->role, 
         ]);
     
-        // Create a corresponding profile in the `recruiter_profiles` table
+       
         Recruiterprofile::create([
             'user_id' => $user->id,
             'name' => $user->name,
         ]);
     
-        // Redirect to the recruiter's dashboard or a success page
+        
         return redirect()->route('Account.signin')->with('success', 'Recruiter registration successful!');
     }
     
@@ -152,29 +151,28 @@ public function forgetPassword()
 }
 public function sendResetLink(Request $request)
 {
-    // Validate the email
+   
     $request->validate([
-        'email' => 'required|email|exists:users,email', // Ensure the email exists in the 'users' table
+        'email' => 'required|email|exists:users,email', 
     ]);
 
-    // Generate a token
     $token = Str::random(60);
 
-    // Insert the token and email into the password_resets table
+    
     DB::table('password_resets')->where('email', $request->email)->delete();
     DB::table('password_resets')->insert([
         'email' => $request->email,
         'token' => $token,
-        'created_at' => now(), // Ensure this function is used with parentheses
+        'created_at' => now(), 
     ]);
 
-    // Send Email Here
+    
     $user = User::where('email', $request->email)->first();
 
     $formData = [
         'token' => $token,
         'user' => $user,
-        'mailSubject' => 'You have requested to reset your password', // Add a comma here
+        'mailSubject' => 'You have requested to reset your password', 
     ];
 
     Mail::to($request->email)->send(new ResetPassword($formData));
@@ -184,7 +182,7 @@ public function sendResetLink(Request $request)
 
 public function showResetForm($token)
 {
-    // Pass the token to the view as part of the formData
+    
     $tokenExist =DB::table('password_resets')->where('token', $token)->first();
     if($tokenExist==null){
         return redirect()->route('Account.forgetPassword')->with('error','Invalid request');
@@ -194,38 +192,38 @@ public function showResetForm($token)
 
 public function processResetPassword(Request $request)
 {
-    // Get token from the request
+   
     $token = $request->token;
 
-    // Fetch the password reset record by token
+   
     $tokenObj = DB::table('password_resets')->where('token', $token)->first();
 
     if ($tokenObj === null) {
         return redirect()->route('Account.forgetPassword')->with('error', 'Invalid or expired reset link.');
     }
 
-    // Fetch the user associated with the email
+   
     $user = User::where('email', $tokenObj->email)->first();
 
     if (!$user) {
         return redirect()->route('Account.forgetPassword')->with('error', 'User not found.');
     }
 
-    // Validate the input fields
+   
     $request->validate([
         'password' => 'required|min:5',
         'password_confirmation' => 'required|same:password',
     ]);
 
-    // Update the user's password
+  
     $user->update([
         'password' => Hash::make($request->password),
     ]);
 
-    // Delete the reset token record
+   
     DB::table('password_resets')->where('email', $user->email)->delete();
 
-    // Redirect with success message
+  
     return redirect()->route('Account.signin')->with('success', 'Your password has been reset successfully. You can now log in.');
 }
 
@@ -249,36 +247,42 @@ public function processResetPassword(Request $request)
           
            
            public function loginUser(Request $request)
-           {
-               // Validate input fields
-               $request->validate([
-                   'email' => 'required|email',
-                   'password' => 'required',
-               ]);
-           
-               // Attempt to authenticate the user
-               if (Auth::attempt($request->only('email', 'password'))) {
-                   // Get the authenticated user
-                   $user = Auth::user();
-           
-                   // Redirect based on the user's role
-                   if ($user->role === 'student') {
-                    return redirect()->route('dashboard')->with('success', 'Welcome to the student dashboard!');
-                } elseif ($user->role === 'recruiter') {
-                    return redirect()->route('recruiterdashboard')->with('success', 'Welcome to the recruiter dashboard!');
-                } elseif ($user->role === 'admin') {
-                    return redirect()->route('admin.dashboard')->with('success', 'Welcome to the admin dashboard!');
-                } else {
-                    // Logout if the role is invalid or not recognized
-                    Auth::logout();
-                    return redirect()->route('login')->withErrors('Invalid role. Contact support.');
-                }
-            
-               }
-           
-               // If authentication fails, redirect back with error
-               return back()->with('error', 'Invalid email or password.');
-           }
+{
+    // Validate input fields with custom error messages
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+        'role' => 'in:student,recruiter,admin',
+    ], [
+        'email.required' => 'The email field is required.',
+        'email.email' => 'Please enter a valid email address.',
+        'password.required' => 'The password field is required.',
+        'role.in' => 'Invalid role. Contact support.',
+    ]);
+
+    // Attempt to authenticate the user
+    if (Auth::attempt($request->only('email', 'password'))) {
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Redirect based on the user's role
+        if ($user->role === 'student') {
+            return redirect()->route('home.dindex')->with('success', 'Welcome to the student dashboard!');
+        } elseif ($user->role === 'recruiter') {
+            return redirect()->route('recruiter.dashboard')->with('success', 'Welcome to the recruiter dashboard!');
+        } elseif ($user->role === 'admin') {
+            return redirect()->route('admin.dashboard')->with('success', 'Welcome to the admin dashboard!');
+        } else {
+            // Logout if the role is invalid or not recognized
+            Auth::logout();
+            return redirect()->route('login')->withErrors(['error' => 'Invalid role. Contact support.']);
+        }
+    }
+
+    // If authentication fails, redirect back with error
+    return back()->withErrors(['error' => 'Invalid email or password.']);
+}
+
         
     
            

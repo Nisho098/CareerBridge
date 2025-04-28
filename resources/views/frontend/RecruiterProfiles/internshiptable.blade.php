@@ -27,7 +27,9 @@
                 <tr>
                     <th>Job Title</th>
                     <th>Job_type</th>
-                    <th>Deadline</th>
+                   
+                    <th>Description</th>
+                    <th>Requirement</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -39,7 +41,9 @@
 <tr>
     <td>{{ $job->title }}</td>
     <td>{{ ucfirst($job->job_type) }}</td>
-    <td>{{ \Carbon\Carbon::parse($job->application_deadline)->format('F j, Y') }}</td>
+    <td>{{ ucfirst($job->description) }}</td>
+    <td>{{ ucfirst($job->requirements) }}</td>
+   
   
     <td>
     <a href="{{ route('postinternships.edit', $job->id) }}" class="btn btn-primary">Edit</a>

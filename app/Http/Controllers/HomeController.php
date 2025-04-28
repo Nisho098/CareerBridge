@@ -20,11 +20,16 @@ class HomeController extends Controller
     {
        return view('frontend.home');
     }
-    public function logout()
-    {
-       return view('frontend.home');
-    }
-  
+    // public function logout(Request $request)
+    // {
+    //     Auth::logout();
+
+    //     // Invalidate the session
+    //     $request->session()->invalidate();
+    //     $request->session()->regenerateToken();
+
+    //     return redirect()->route('home')->with('success', 'You have logged out successfully.');
+    // }
     
 
     

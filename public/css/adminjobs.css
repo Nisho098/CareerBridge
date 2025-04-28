@@ -46,8 +46,10 @@ button {
     cursor: pointer;
     border-radius: 4px;
     transition: 0.3s;
+    margin-right: 8px; 
 }
 
+/* Style for the action buttons */
 button.bg-green-500 {
     background: #28a745;
     color: white;
@@ -64,4 +66,11 @@ button.bg-red-500 {
 
 button.bg-red-500:hover {
     background: #c82333;
+}
+
+/* Flex container to align buttons in the same row */
+.action-buttons {
+    display: inline-flex; 
+    justify-content: flex-start; 
+    gap: 8px; /* Space between buttons */
 }

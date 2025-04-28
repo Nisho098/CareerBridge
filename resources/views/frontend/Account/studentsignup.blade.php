@@ -14,7 +14,7 @@
   <div class="container">
     <h1>Career Bridge</h1>
     <p>Get started Now by finding the job <br>you are looking for</p>
-     <!-- Popup Message (Will appear if session status is set) -->
+     
   @if (session('status'))
     <div class="alert alert-success">
         {{ session('status') }}
@@ -82,7 +82,7 @@
   <label for="contact-number">Contact Number</label>
   <input type="tel" name="contact_number" id="contact-number" placeholder="Enter your number" value="{{ old('contact_number') }}" >
 </div>
-<div class="form-group">
+<!-- <div class="form-group">
   <label for="industry">Desired Industry</label>
   <select name="desired_industry" id="industry" >
     <option value="">Select desired industry</option>
@@ -93,7 +93,7 @@
     <option value="Engineering" {{ old('desired_industry') == 'Engineering' ? 'selected' : '' }}>Engineering</option>
     <option value="Other" {{ old('desired_industry') == 'Other' ? 'selected' : '' }}>Other</option>
   </select>
-</div>
+</div> -->
 
 
       <button type="submit" class="btn">Signup</button>

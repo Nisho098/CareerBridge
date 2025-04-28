@@ -62,12 +62,12 @@
                 </div>
                 <span>Remote</span>
             </a>
-            <a href="#" class="category-icon">
+            <!-- <a href="#" class="category-icon">
                 <div class="image-container">
                     <img src="{{ asset('images/suitcase.png') }}" alt="Entry Level">
                 </div>
                 <span>Entry Level</span>
-            </a>
+            </a> -->
         </section>
     </section>
 </main>

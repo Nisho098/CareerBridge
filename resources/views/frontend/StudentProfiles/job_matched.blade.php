@@ -12,7 +12,12 @@
     <h2>{{ $job->title }}</h2>
     <p><strong>Company:</strong> {{ $job->industry }}</p>
     <p><strong>Deadline:</strong> {{ \Carbon\Carbon::parse($job->application_deadline)->format('F j, Y') }}</p>
-    <a href="{{ url('/jobs/' . $job->id) }}">View Job Details</a>
-
+    
+ 
+    @if(auth()->check())
+        <a href="{{ route('jobs.show', $job->id) }}">View Job Details</a>
+    @else
+        <p><strong>Note:</strong> You need to <a href="{{ route('login') }}">log in</a> to view the job details.</p>
+    @endif
 </body>
 </html>

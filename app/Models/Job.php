@@ -44,14 +44,7 @@ public function recruiter()
     return $this->belongsTo(RecruiterProfile::class, 'recruiter_id');
 }
 
-
-
-
-    
-    
-    
-    
-    
+   
 public function applications()
 {
     return $this->hasMany(Application::class);

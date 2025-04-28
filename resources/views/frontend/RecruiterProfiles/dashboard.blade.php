@@ -24,15 +24,12 @@
             </div>
 
             <ul class="nav-links">
-                <li><a href="{{ route('dashboard') }}" class="nav-item"><span>Dashboard</span></a></li>
-                <li>
-                <a href="{{ route('recruiter.showApplications', ['jobId' => $job->id ?? null]) }}" class="nav-item">
+                <li><a href="{{route('recruiter.dashboard')}}" class="nav-item"><span>Dashboard</span></a></li>
+               <li> <a href="{{ route('recruiter.showApplications', ['jobId' => $job->id ?? null]) }}" class="nav-item">
     <span>Candidates</span>
-</a>
+</a></li>
 
-<a href="{{ url('/chatify') }}" class="nav-item">
-    <span>Chats</span>
-</a>
+<li><a href="/chat" class="nav-item"> <span>Chats</span> </a></li>
 
 
 
@@ -44,8 +41,8 @@
                </ul>
            
 
-            <!-- Logout Button -->
-            <div class="logout">
+           <!-- Logout Button -->
+           <div class="logout">
                 <a href="{{ route('home') }}"><i class="uil uil-signout"></i>Logout</a>
             </div>
         </nav>

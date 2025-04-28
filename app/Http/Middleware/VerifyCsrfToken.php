@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //
+        'auth/github/callback', // Add this line to disable CSRF for GitHub callback
     ];
+    
 }

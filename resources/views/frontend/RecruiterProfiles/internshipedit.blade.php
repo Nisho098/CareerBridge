@@ -29,10 +29,7 @@
                 <input type="text" id="title" name="title"  value="{{ old('title', $job->title) }}"  placeholder="Enter internship title" >
             </div>
 
-            <div class="form-group">
-                <label for="location">City</label>
-                <input type="text" id="location" name="location"    value="{{ old('location', $job->location) }}"  placeholder="Enter city">
-            </div>
+
 
             <div class="form-group">
                 <label for="job_type">Internship Type</label>

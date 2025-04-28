@@ -42,10 +42,10 @@
         </select>
       </div>
 
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="contactNo">Company Contact No</label>
         <input type="tel" id="contactNo" name="contact_no" placeholder="Enter Company Contact number" >
-      </div>
+      </div> -->
 
       <div class="form-group">
         <label for="email">Official Email</label>

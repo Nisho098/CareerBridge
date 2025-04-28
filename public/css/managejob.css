@@ -1,0 +1,72 @@
+/* Table header styling */
+.table-header {
+    background-color: #3b82f6; 
+    color: white;
+}
+
+.table-header th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+tbody tr {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+td {
+    padding: 12px 15px;
+}
+
+/* Success message styling */
+.bg-green-100 {
+    background-color: #d1fae5;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+/* Delete button style */
+.delete-btn {
+    background-color: #dc2626; 
+    color: white;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+    background-color: #b91c1c; 
+}
+
+.delete-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.5);
+}
+
+/* Container styling */
+.container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Empty state styling */
+.text-center {
+    text-align: center;
+}

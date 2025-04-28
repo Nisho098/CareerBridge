@@ -24,7 +24,7 @@ class JobMatched extends Mailable
     public function build()
     {
         return $this->subject('Job Match Notification')
-                    ->view('frontend.StudentProfiles.job_matched'); // Correct view path
+                    ->view('frontend.StudentProfiles.job_matched'); 
     }
     
 }

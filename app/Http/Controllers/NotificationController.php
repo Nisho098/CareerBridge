@@ -20,7 +20,7 @@ class NotificationController extends Controller
         return view('frontend.StudentProfiles.notification', compact('notifications'));
     }
 
-    
+  
 
    
 }

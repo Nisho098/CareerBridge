@@ -16,13 +16,13 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
     
-        // Ensure StudentProfile exists or create a new one
+        
         $studentProfile = StudentProfile::firstOrCreate(
             ['user_id' => $user->id], 
-            ['profile_picture' => null, 'name' => $user->name] // Set the name from the user
+            ['profile_picture' => null, 'name' => $user->name] 
         );
     
-        $jobs = Job::all(); // Fetch all job listings
+        $jobs = Job::all(); 
     
         return view('frontend.StudentProfiles.landing', compact('user', 'jobs', 'studentProfile'));
     }
@@ -36,16 +36,16 @@ class ProfileController extends Controller
         $user = Auth::user();
         $studentProfile = StudentProfile::firstOrCreate(['user_id' => $user->id]);
 
-        // Delete old profile picture if exists
+       
         if ($studentProfile->profile_picture) {
             Storage::delete('public/profile_pictures/' . $studentProfile->profile_picture);
         }
 
-        // Store the new profile picture
+      
         $imageName = time() . '.' . $request->profile_picture->getClientOriginalExtension();
         $request->profile_picture->storeAs('public/profile_pictures', $imageName);
 
-        // Update the student's profile picture in the database
+        
         $studentProfile->update(['profile_picture' => $imageName]);
 
         return back()->with('success', 'Profile picture uploaded successfully!');

@@ -7,19 +7,30 @@
         <h1>Welcome back!</h1>
         <p>Enter your credentials to access your account</p>
         <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+        @if (session('error'))
+    <div class="alert alert-danger">
+        <p>{{ session('error') }}</p>
+    </div>
+@endif
+
         @if (session('success'))
     <div class="alert alert-success">
         <p>{{ session('success') }}</p>
     </div>
 @endif
-@if(session('error'))
+@if ($errors->any())
     <div class="alert alert-danger">
-        {{ session('error') }}
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
     </div>
 @endif
 
 
-<!-- The rest of your login form goes here -->
+
+
 
         <form action="{{ route('Account.signin') }}" method="POST">
       
@@ -41,6 +52,7 @@
             
             <button type="submit" class="btn">Login</button>
            
+
            
 
             

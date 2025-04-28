@@ -117,13 +117,12 @@
   color: #155724;
   border: 1px solid #c3e6cb;
   border-radius: 5px;
-  display: none; /* Initially hidden */
-  opacity: 0; /* Hidden by default */
+  display: none; 
+  opacity: 0; 
   transition: opacity 0.5s ease, top 0.5s ease;
 }
 
-/* Animation to show the popup */
-/* Success message styling */
+
 .alert-success {
   background-color: #d4edda;
   color: #155724;

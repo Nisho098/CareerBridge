@@ -16,7 +16,7 @@ class AdminController extends Controller
 
     public function manageUsers()
     {
-        $users = User::all(); // Fetch all users
+        $users = User::all(); 
         return view('frontend.AdminPage.users', compact('users'));
     }
     public function destroy($id)
@@ -31,7 +31,7 @@ class AdminController extends Controller
     public function showPendingJobs()
 {$jobs = Job::with('recruiter')->where('status', 'pending')->get();
 
-    // Fetch only jobs awaiting approval
+    
     return view('frontend.AdminPage.approved', compact('jobs'));
 }
 
@@ -41,10 +41,10 @@ public function approveJob($id)
     $job->status = 'approved';
     $job->save();
 
-    // Convert job title into lowercase words
+    
     $jobTitleWords = array_map('strtolower', explode(' ', $job->title));
 
-    // Fetch students with skills matching job title words
+   
     $students = User::where('role', 'student')
         ->whereHas('studentProfile', function ($query) use ($jobTitleWords) {
             $query->where(function ($q) use ($jobTitleWords) {
@@ -55,10 +55,10 @@ public function approveJob($id)
         })
         ->get();
 
-    // ✅ Debugging: Log the students who match
+  
     Log::info("Matching students for Job ID {$job->id}: " . $students->pluck('id')->join(', '));
 
-    // Notify only matching students
+   
     foreach ($students as $student) {
         app(JobController::class)->matchJob($student, $job);
     }
@@ -79,7 +79,17 @@ public function deleteJob($id)
     return redirect()->back()->with('success', 'Job deleted successfully.');
 }
 
+public function jobs()
+{
+    $jobs = Job::all();
+    return view('frontend.AdminPage.Jobs', compact('jobs')); 
+}
+public function destroyjob($id)
+{
+    $job = Job::findOrFail($id);
+    $job->delete();
 
-
+    return redirect()->route('jobs.index')->with('success', 'Job deleted successfully.');
+}
 
 }

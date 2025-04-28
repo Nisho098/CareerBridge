@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="chat-app">
-        <!-- Sidebar -->
+       
         <div class="sidebar">
             <div class="sidebar-header">
                 <h2>Career Bridge</h2>
@@ -31,7 +31,7 @@
             </div>
         </div>
 
-        <!-- Chat Window -->
+       
         <div class="chat-container">
             <div class="chat-header">
                 <img src="profile.png" alt="Profile" class="profile-pic">

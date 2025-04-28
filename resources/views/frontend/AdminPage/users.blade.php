@@ -5,6 +5,12 @@
 @section('content')
 <div class="container mx-auto p-6">
     <h2 class="text-2xl font-semibold mb-4">Manage Users</h2>
+    @if(session('success'))
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+        {{ session('success') }}
+    </div>
+@endif
+
     <link rel="stylesheet" href="{{ asset('css/users.css') }}">
     <table class="min-w-full bg-white border border-gray-300">
         <thead>

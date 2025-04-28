@@ -26,27 +26,27 @@
 
         <div>
             <label for="name">Full Name:</label>
-            <input type="text" id="name" name="name" value="{{ Auth::user()->name }}" required>
+            <input type="text" id="name" name="name" value="{{ Auth::user()->name }}" >
         </div>
 
         <div>
             <label for="email">Email Address:</label>
-            <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" required>
+            <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" >
         </div>
 
         <div>
             <label for="contact">Phone Number:</label>
-            <input type="tel" id="contact" name="contact" value="{{ Auth::user()->studentProfile->contact }}" required>
+            <input type="tel" id="contact" name="contact" value="{{ Auth::user()->studentProfile->contact }}" >
         </div>
 
         <div>
             <label for="location">Location:</label>
-            <input type="text" id="location" name="location" value="{{ Auth::user()->studentProfile->location }}" required>
+            <input type="text" id="location" name="location" value="{{ Auth::user()->studentProfile->location }}" >
         </div>
 
         <div>
             <label for="cover_letter">Cover Letter:</label>
-            <input type="file" id="cover_letter" name="cover_letter" required>
+            <input type="file" id="cover_letter" name="cover_letter" >
         </div>
 
         <button type="submit" class="btn btn-primary">Submit Application</button>

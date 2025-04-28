@@ -21,7 +21,7 @@
                 <p class="text-gray-700 font-medium">
                     {{ $notification->message }}
                 </p>
-                <!-- Removed the timestamp line -->
+               
             </div>
         </div>
     </div>

@@ -16,11 +16,16 @@ class AdminMiddleware
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     
-        public function handle(Request $request, Closure $next)
-        {
-            if (auth()->user() && auth()->user()->role === 'admin') {
-                return $next($request);
-            }
-            return redirect('/')->withErrors('Unauthorized access.');
-        }
+     public function handle(Request $request, Closure $next)
+     {
+         if (!auth()->check()) {
+             return redirect()->route('Account.signin');
+         }
+         
+         if (auth()->user()->role !== 'admin') {
+             return redirect('/')->withErrors('Unauthorized access.');
+         }
+         
+         return $next($request);
+     }
 }

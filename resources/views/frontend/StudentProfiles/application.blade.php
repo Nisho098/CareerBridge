@@ -1,5 +1,5 @@
 
-@extends('frontend.StudentProfiles.dashboard') <!-- Extend from dashboard layout -->
+@extends('frontend.StudentProfiles.dashboard') 
 
 @section('content')
     <div class="container">

@@ -16,4 +16,12 @@
         <p>Review and approve job postings before they go live.</p>
         <a href="{{ route('admin.pendingJobs') }}" class="btn">Review Posts</a>
     </div>
+    <div class="card">
+        <h2>Manage Job </h2>
+        <p>View, edit, or remove Jobs.</p>
+        <a href="{{ route('admin.pendingJobs') }}" class="btn">Review Posts</a>
+    </div>
+
+       
+    
 @endsection

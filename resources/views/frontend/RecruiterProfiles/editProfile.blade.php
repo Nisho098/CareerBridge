@@ -93,6 +93,9 @@
         <label class="form-label">About Company</label>
         <textarea class="form-control" name="aboutcompany" rows="3">{{ old('aboutcompany', optional(Auth::user()->recruiterProfile)->aboutcompany) }}</textarea>
     </div>
+   
+
+
 
     <button type="submit" class="btn btn-primary">Save Changes</button>
 </form>

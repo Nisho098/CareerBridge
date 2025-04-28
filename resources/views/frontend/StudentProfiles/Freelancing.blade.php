@@ -2,11 +2,11 @@
 
 @section('content')
 
-<!-- Compare Salaries Button -->
+
 <a href="{{ route('salary.comparison') }}" class="btn-compare-salary">Compare Salaries</a>
 
 <style>
-    /* Global Styles */
+  
     body {
         font-family: 'Arial', sans-serif;
         background-color: #f4f7fc;
@@ -21,7 +21,7 @@
         padding: 30px;
     }
 
-    /* Heading */
+ 
     h1 {
         text-align: left;
         font-size: 2.5rem;
@@ -30,13 +30,13 @@
         font-weight: 600;
     }
 
-    /* Compare Salary Button */
+  
     .btn-compare-salary {
         display: inline-block;
         padding: 12px 20px;
         font-size: 1rem;
         color: white;
-        background-color: rgb(116, 150, 101);
+        background-color: rgb(98, 184, 61);;
         border-radius: 5px;
         text-decoration: none;
         transition: background-color 0.3s ease;
@@ -44,10 +44,10 @@
     }
 
     .btn-compare-salary:hover {
-        background-color: rgb(98, 184, 61);
+        background-color: rgb(116, 150, 101);
     }
 
-    /* Job List */
+  
     .job-list {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -55,7 +55,7 @@
         margin-top: 30px;
     }
 
-    /* Job Card Styling */
+
     .job-card {
         background-color: #ffffff;
         border-radius: 8px;
@@ -74,7 +74,7 @@
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     }
 
-    /* Job Title */
+ 
     .job-card h3 {
         font-size: 1.7rem;
         color: #333;
@@ -87,7 +87,7 @@
         color: rgb(116, 150, 101);
     }
 
-    /* Job Details */
+
     .job-card p {
         font-size: 1rem;
         color: #555;
@@ -100,16 +100,16 @@
         font-weight: 600;
     }
 
-    /* Skills and Description */
+
     .job-card .skills-required {
         font-size: 0.95rem;
         color: #777;
         margin-bottom: 20px;
     }
 
-    /* Apply Now Button */
+ 
     .job-card .btn-primary {
-        background-color: rgb(116, 150, 101);
+        background-color: rgb(98, 184, 61);
         color: white;
         padding: 12px 20px;
         border: none;
@@ -123,10 +123,10 @@
     }
 
     .job-card .btn-primary:hover {
-        background-color: rgb(98, 184, 61);
+        background-color: rgb(116, 150, 101);
     }
 
-    /* No Opportunities Message */
+ 
     .job-list p {
         text-align: center;
         font-size: 1.2rem;
@@ -134,7 +134,7 @@
         margin-top: 30px;
     }
 
-    /* Responsive Design */
+
     @media screen and (max-width: 768px) {
         .job-list {
             grid-template-columns: 1fr 1fr;
@@ -155,11 +155,9 @@
 <div class="container">
     <h1>Freelancing Opportunities</h1>
 
-    <!-- Show Average Salary for Freelancing Jobs -->
+  
     <div style="margin-bottom: 20px; padding: 15px; background-color: #eef2ff; border-radius: 5px;">
-        <h3>Average Salary for Freelancing Jobs: 
-            <span style="color: #4a90e2;">Rs. {{ number_format($averageSalary, 2) }}</span>
-        </h3>
+       
     </div>
 
     @if($freelancingJobs->isEmpty())
@@ -188,7 +186,7 @@
 
                     <p><strong>Salary:</strong> Rs. {{ number_format($job->salary, 2) }}</p>
 
-                    <!-- Apply Now Button -->
+                
                     <a href="{{ route('apply.create', $job->id) }}" class="btn-primary">Apply Now</a>
                 </div>
             @endforeach

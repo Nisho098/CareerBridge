@@ -35,14 +35,14 @@
         .form-container button {
             width: 100%;
             padding: 10px;
-            background: #007bff;
+            background: #28a745;
             color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
         .form-container button:hover {
-            background: #0056b3;
+            background: #28a745;
         }
         .alert {
             padding: 10px;
@@ -66,7 +66,7 @@
     <div class="form-container">
         <h2>Forgot Password</h2>
         
-        <!-- Display Success or Error Message -->
+       
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
